@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <script
+			  src="https://code.jquery.com/jquery-3.3.1.js"
+			  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+			  crossorigin="anonymous"></script>
+  </head>
+  <body>
+      <script>
+          const GITHUB_ACCOUNT = 'Novusphere';
+          const GITHUB_PROJECT = 'eos-forum';
+          const RAW_GIT = 'https://cdn.rawgit.com';
+
+          const RAW_GIT_PATH = RAW_GIT+'/'+GITHUB_ACCOUNT+'/'+GITHUB_PROJECT;
+
+          $.get(RAW_GIT_PATH+'/gh-pages/index.html', function (html) {
+                
+                var rx = /=static\//gi;
+                var test = html.replace(rx, '=' + RAW_GIT_PATH + '/gh-pages/static/');
+
+                document.open();
+                document.write(test);
+                document.close();
+
+          });
+      </script>
+  </body>
+</html>
