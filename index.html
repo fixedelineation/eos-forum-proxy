@@ -1,37 +1,40 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <script
-			  src="https://code.jquery.com/jquery-3.3.1.js"
-			  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-			  crossorigin="anonymous"></script>
-  </head>
-  <body>
-      <script>
-          //const GITHUB_ACCOUNT = 'Novusphere';
-          //const GITHUB_PROJECT = 'eos-forum';
-          //const RAW_GIT = 'https://cdn.rawgit.com';
-          //const RAW_GIT = 'https://raw.githubusercontent.com';
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+</head>
 
-          //const RAW_GIT_PATH = RAW_GIT+'/'+GITHUB_ACCOUNT+'/'+GITHUB_PROJECT;
-          //const INDEX_PATH = RAW_GIT_PATH+'/gh-pages/index.html';
-          //const REPLACER = '=' + RAW_GIT_PATH + '/gh-pages/static/';
+<body>
+    <script>
+        const MAIN_PAGE = 'https://eos-forum.org';
 
-          const INDEX_PATH = 'https://eos-forum.org/index.html';
-          const REPLACER = '=https://eos-forum.org/static/';
+        const INDEX_PATH = MAIN_PAGE + '/index.html';
+        const REPLACER = '=' + MAIN_PAGE + '/static/';
 
-          $.get(INDEX_PATH, function (html) {
-                
-                var rx = /=static\//gi;
-                var page = html.replace(rx, REPLACER);
+        const PRESETS = {
+            storage: {
+                eos_referendum: false,
+                subscribed_subs: ["all", "anon", "anon-pol-econ"],
+                settings: {
+                    theme: "https://eos-forum.org/static/css/theme/night.css"
+                }
+            }
+        };
 
-                document.open();
-                document.write(page);
-                document.close();
+        window.localStorage.setItem('presets', JSON.stringify(PRESETS));
 
-          });
-      </script>
-  </body>
+        $.get(INDEX_PATH, function (html) {
+            var rx = /=static\//gi;
+            var page = html.replace(rx, REPLACER);
+
+            document.open();
+            document.write(page);
+            document.close();
+        });
+    </script>
+</body>
+
 </html>
