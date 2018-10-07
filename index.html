@@ -9,6 +9,11 @@
 
 <body>
     <script>
+        if (window.location.protocol == 'http:') {
+            window.location.protocol = "https:";
+            return;
+        }
+
         const MAIN_PAGE = 'https://eos-forum.org';
 
         const INDEX_PATH = MAIN_PAGE + '/index.html';
@@ -18,8 +23,9 @@
             default_sub: "anon",
             storage: {
                 eos_referendum: false,
-                subscribed_subs: ["all", "anon", "anon-pol-econ"],
+                subscribed_subs: ["all", "novusphere", "anon", "anon-pol-econ"],
                 moderation: {
+                    hide_spam_threads: false,
                     mods: [ "Novusphere/eos-forum-mod" ]
                 },
                 settings: {
