@@ -9,41 +9,43 @@
 
 <body>
     <script>
-        if (window.location.protocol == 'http:') {
-            window.location.protocol = "https:";
-            return;
-        }
-
-        const MAIN_PAGE = 'https://eos-forum.org';
-
-        const INDEX_PATH = MAIN_PAGE + '/index.html';
-        const REPLACER = '=' + MAIN_PAGE + '/static/';
-
-        const PRESETS = {
-            default_sub: "anon",
-            storage: {
-                eos_referendum: false,
-                subscribed_subs: ["all", "novusphere", "anon", "anon-pol-econ"],
-                moderation: {
-                    hide_spam_threads: false,
-                    mods: [ "Novusphere/eos-forum-mod" ]
-                },
-                settings: {
-                    theme: "https://eos-forum.org/static/css/theme/night.css"
-                }
+        (function () {
+            if (window.location.protocol == 'http:') {
+                window.location.protocol = "https:";
+                return;
             }
-        };
 
-        window.localStorage.setItem('presets', JSON.stringify(PRESETS));
+            const MAIN_PAGE = 'https://eos-forum.org';
 
-        $.get(INDEX_PATH, function (html) {
-            var rx = /=static\//gi;
-            var page = html.replace(rx, REPLACER);
+            const INDEX_PATH = MAIN_PAGE + '/index.html';
+            const REPLACER = '=' + MAIN_PAGE + '/static/';
 
-            document.open();
-            document.write(page);
-            document.close();
-        });
+            const PRESETS = {
+                default_sub: "anon",
+                storage: {
+                    eos_referendum: false,
+                    subscribed_subs: ["all", "novusphere", "anon", "anon-pol-econ"],
+                    moderation: {
+                        hide_spam_threads: false,
+                        mods: ["Novusphere/eos-forum-mod"]
+                    },
+                    settings: {
+                        theme: "https://eos-forum.org/static/css/theme/night.css"
+                    }
+                }
+            };
+
+            window.localStorage.setItem('presets', JSON.stringify(PRESETS));
+
+            $.get(INDEX_PATH, function (html) {
+                var rx = /=static\//gi;
+                var page = html.replace(rx, REPLACER);
+
+                document.open();
+                document.write(page);
+                document.close();
+            });
+        })();
     </script>
 </body>
 
