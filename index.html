@@ -5,48 +5,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-<template>
-  <div>
-    <div class="header">
-      <ul class="list-inline mb-0" v-if="identity">
-            <li class="list-inline-item">
-              <router-link :to="'/'">
-                <img src="https://www.farmeos.io/assets/images/icons.614db397c615.png" height="30" class="d-inline-block align-top" alt="">
-              </router-link>
-            </li>
-            <li v-if="!identity.account" class="list-inline-item">
-              <a v-on:click="login()" href="javascript:void(0)">login</a>
-            </li>
-            <li v-if="identity.account" class="list-inline-item">
-              <router-link :to="'/u/' + identity.account" class="text-mine">
-                {{ identity.account }} | {{ identity.atmos }} ATMOS
-              </router-link>
-            </li>
-            <li v-if="identity.account" class="list-inline-item">
-              <router-link :to="'/notifications'">
-                <font-awesome-icon :icon="['fas', 'bell']" ></font-awesome-icon>
-                <span v-if="identity.notifications" class="badge badge-danger">{{ identity.notifications }}</span>
-              </router-link>
-            </li>
-            <li v-if="identity.account" class="list-inline-item">
-              <a v-on:click="logout()" href="javascript:void(0)">logout</a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#settings" data-toggle="modal">settings</a>
-            </li>
-            <li v-if="eos_referendum" class="list-inline-item">
-              <router-link :to="'/referendum'">eos-referendum</router-link>
-            </li>
-            <li class="list-inline-item">
-              <a href="#faq" data-toggle="modal">faq/help</a>
-            </li>
-    </ul>
-    <ul class="list-inline">
-      <li v-for="sub in subs" :key="sub" class="list-inline-item"><router-link :to="'/e/' + sub">{{sub}}</router-link></li>
-    </ul>
-    <div class="text-center ml-1 mr-1" v-html="random_header">
-    </div>
-  </div>
 </head>
 
 <body>
